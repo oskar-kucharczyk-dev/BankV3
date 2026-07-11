@@ -1,4 +1,4 @@
-from konto import Konto
+from BankV3.konto import Konto
 def wczytaj_konta():
     konta = []
 

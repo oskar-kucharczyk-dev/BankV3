@@ -1,6 +1,6 @@
 from datetime import datetime
 from konto import Konto
-from Operacje import znajdz_konto,najbogatszy_klient,usun_uzytkownika
+from operacje import znajdz_konto,obsluz_zmiane_hasla,usun_uzytkownika
 from historia import historia_operacji
 from pliki import wczytaj_konta,zapisz_wszystkie_konta
     
@@ -41,39 +41,11 @@ def menu():
 
 
 
-
-
-
-
-
-            
-
-
-   
-    
-
-
-
-
-
-        
-       
-
-
-
-                
-                
-
-        
-    
-
-
 while True:
     konta = wczytaj_konta()
     konto = logowanie(konta)
     if konto == None:
-        print("Niepoprawny login.")
-        konto
+        continue
     
         
     else:
@@ -110,11 +82,16 @@ while True:
                 if depozyt <= 0:
                     print("Niepoprawna kwota.")
                     break
-                else:
-                    saldo_przed = konto.saldo
-                    konto.wyplata(depozyt)
+                saldo_przed = konto.saldo
+                wynik = konto.wyplata(depozyt)
+                
+                if wynik:
                     zapisz_wszystkie_konta(konta)
                     historia_operacji("WYPŁATA",konto,depozyt,saldo_przed)
+
+                if not wynik:
+                    print("Operacja się nie udała.")
+                    continue
                     
             elif wybor == 8:
                 print("Zapraszamy ponownie. ")
@@ -160,24 +137,15 @@ while True:
                     print("Przepraszamy, ale podany login jest już używany prosimy o wybranie innego.")
                     continue
             elif wybor == 6:
-                stare_haslo = input("Wprowadź stare hasło: ")
-                nowe_haslo = input("Wprowadź nowe hasło: ")
-                nowe_haslo_sprawdzenie = input("Wprowadź nowe hasło jeszcze raz: ")
+                wynik = obsluz_zmiane_hasla(konto)
                 
-                
-                
-                if len(nowe_haslo) < 6:
-                    print("Hasło musi się składać z 6 znaków: ")
-                    continue
-                elif nowe_haslo != nowe_haslo_sprawdzenie:
-                    print("Hasła nie są takie same.")
-                    break
-                wynik = konto.zmien_haslo(stare_haslo,nowe_haslo)
                 if wynik:
                     print("Hasło zostało zmienione pomyślnie.")
                     zapisz_wszystkie_konta(konta)
+                    break
                 if wynik == False:
                     print("Haslo niepoprawne.")
+                    continue
             elif wybor == 7:
                 decyzja = input("Czy napewno chcesz usunąć konto?(TAK/NIE): ")
                 if decyzja == "TAK":

@@ -11,9 +11,12 @@ class Konto:
     def wyplata(self, wyplata):
         if wyplata > self.saldo:
             print("Nie wystarczająca ilość środków na koncie.")
-        else:
-            self.saldo -= wyplata
-            print(f"Nowe saldo konta po wypłacie {wyplata} zł to {self.saldo} zł")
+            return False
+        
+        self.saldo -= wyplata
+        print(f"Nowe saldo konta po wypłacie {wyplata} zł to {self.saldo} zł")
+        return True
+    
     def przelew(self, uzytkownik,kwota):
         if kwota > self.saldo:
             print("Nie wystarczająca kwota na przelew środków.")
@@ -63,3 +66,5 @@ class Konto:
 
         self.haslo = nowe_haslo
         return True
+    
+    
