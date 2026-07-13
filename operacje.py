@@ -29,9 +29,10 @@ def obsluz_zmiane_hasla(konto):
             continue
         wynik = konto.zmien_haslo(stare_haslo,nowe_haslo)
         if wynik:
-            print("Hasła są poprawne i spełniają warunki.")
+            print("Hasło zostało zmienione pomyślnie.")
             return True
         
+        print("Stare hasło jest niepoprawne.")
         return False
 
     
