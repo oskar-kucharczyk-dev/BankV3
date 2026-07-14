@@ -1,6 +1,6 @@
 # BankV3
 
-BankV3 is a terminal banking application written in Python. It simulates basic banking operations such as account registration, login, deposits, withdrawals and transfers.
+BankV3 is a terminal banking application written in Python. It simulates basic banking operations such as login, deposits, withdrawals and transfers.
 
 This is my first larger Python project and the first project published in my portfolio. It was created as a practical exercise to develop my programming skills and document the beginning of my journey as a Python developer.
 
